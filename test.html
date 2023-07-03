@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" name="name" id="name" placeholder="name">
+    <br><br>
+    <input type="email" name="email" placeholder="email" id="email">
+    <br><br>
+    <input type="text" name="mobile" placeholder="mobile" id="mobile">
+    <br><br>
+    <input type="text" name="course" id="course" placeholder="course">
+    <br><br>
+    <button id="btn">Submit</button>
+
+    <!-- add firebase CDN -->
+<script src="https://www.gstatic.com/firebasejs/9.12.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.12.1/firebase-database-compat.js"></script>
+
+
+    <script>
+
+const firebaseConfig = {
+    databaseURL: "https://gtyde-academy-default-rtdb.firebaseio.com"
+}
+firebase.initializeApp(firebaseConfig)
+const database = firebase.database()
+const submit=document.getElementById("btn")
+submit.onclick=()=>sendData()
+
+function sendData(){
+    var name=document.getElementById("name").value
+    var email=document.getElementById("email").value
+    var mobile=document.getElementById("mobile").value
+    var course=document.getElementById("course").value
+    console.log(name,email,mobile,course)
+
+
+    var listRef = database.ref('messages/')
+var newRef = listRef.push()
+newRef.set({
+    'name': name,
+    'email': email,
+    'mobile': mobile,
+    "course":course
+})
+
+}
+
+
+
+    </script>
+</body>
+</html>
